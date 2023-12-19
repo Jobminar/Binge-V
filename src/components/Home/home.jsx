@@ -30,13 +30,13 @@ const Home = () => {
   };
 
   const openCall = () => {
-    // Replace the phone number with the actual phone number
+    
     window.open("tel:+918074020058");
   };
   const openLocation = () => {
     window.open("https://maps.app.goo.gl/b5xtHs2DNd3oRuVX6?g_st=ic", "_blank");
   };
-  //
+  //..
   return (
     <>
       <div className="Beigein-home-con">
