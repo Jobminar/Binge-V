@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./payment.css";
 import LogoImg from "../../assets/images/logo.png";
-import BgImage from "../../assets/images/Home-bg-img.jpeg";
-import { Height } from "@mui/icons-material";
 
 const generateRandomPaymentID = () => {
   return `PAY-${Math.random().toString(36).substring(7).toUpperCase()}`;
@@ -99,7 +96,7 @@ const Paymentstep = () => {
   };
 
   return (
-    <div className="container-fluid invoice-container">
+    <div className="container-fluid sub-container">
       <div className="row justify-content-center">
         <div className="col-lg-8">
           <div className="card shadow-lg">
@@ -108,7 +105,7 @@ const Paymentstep = () => {
                 <img
                   src={LogoImg}
                   alt="Logo"
-                  className="logo m-auto ms-lg-5"
+                  className="logo m-auto ms-lg-1 reduced-logo"
                   onClick={() => navigate("/")}
                 />
               </div>
@@ -125,51 +122,48 @@ const Paymentstep = () => {
               )}
 
               {!loading && !error && (
-                <div
-                  className="details-section m-0 mb-0 pb-5"
-                  style={{ height: "720px" }}
-                >
+                <div className="details-section mt-2 mb-0 p-0">
                   <ul className="payment-list">
-                    <li>
-                      <dt>Date:</dt>
-                      <dd>{generatePaymentData().date}</dd>
+                    <li className="d-flex">
+                      <h4 className="dt">Date:</h4>
+                      <h5>{generatePaymentData().date}</h5>
                     </li>
-                    <li>
-                      <dt>Number of People:</dt>
-                      <dd>{generatePaymentData().numOfPeople}</dd>
+                    <li className="d-flex">
+                      <h4 className="dt">Number of People:</h4>
+                      <h5>{generatePaymentData().numOfPeople}</h5>
                     </li>
-                    <li>
-                      <dt>Name:</dt>
-                      <dd>{generatePaymentData().name}</dd>
+                    <li className="d-flex">
+                      <h4 className="dt">Name:</h4>
+                      <h5>{generatePaymentData().name}</h5>
                     </li>
-                    <li>
-                      <dt>Email:</dt>
-                      <dd>{generatePaymentData().email}</dd>
+                    <li className="d-flex">
+                      <h4 className="dt">Email:</h4>
+                      <h5>{generatePaymentData().email}</h5>
                     </li>
-                    <li>
-                      <dt>Phone Number:</dt>
-                      <dd>{generatePaymentData().mobile}</dd>
+                    <li className="d-flex">
+                      <h4 className="dt">Phone Number:</h4>
+                      <h5>{generatePaymentData().mobile}</h5>
                     </li>
-                    <li>
-                      <dt>Cake:</dt>
-                      <dd>{selectedCake}</dd>
+                    <li className="d-flex">
+                      <h4 className="dt">Cake:</h4>
+                      <h5>{selectedCake}</h5>
                     </li>
-                    <li>
-                      <dt>Decoration:</dt>
-                      <dd>{selectedDecoration}</dd>
+                    <li className="d-flex">
+                      <h4 className="dt">Decoration:</h4>
+                      <h5>{selectedDecoration}</h5>
                     </li>
-                    <li>
-                      <dt>Total Amount:</dt>
-                      <dd>
+                    <li className="d-flex">
+                      <h4 className="dt">Total Amount:</h4>
+                      <h5>
                         <strong>${generatePaymentData().totalAmount}</strong>
-                      </dd>
+                      </h5>
                     </li>
                   </ul>
                 </div>
               )}
 
               <button
-                className="btn btn-primary btn-block mt-0"
+                className="btn btn-primary btn-block mt-2"
                 onClick={handleProceed}
               >
                 Proceed to Checkout
