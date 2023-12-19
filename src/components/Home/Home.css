@@ -40,6 +40,9 @@
     align-items: center;
     justify-content: right;
 }
+.grid-con:hover{
+    cursor: pointer;
+}
 .grid-con img{
     width: 4rem;
     height: 2.5rem;

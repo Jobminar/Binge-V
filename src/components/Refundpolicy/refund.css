@@ -8,6 +8,13 @@
     padding: 2rem;
 
 }
+.logo-img{
+  width: 10rem;
+  height: 10rem;
+}
+.logo-img:hover{
+  cursor: pointer;
+}
   .refund-sub h1{
     font-family: Oswald;
     font-size: 32px;

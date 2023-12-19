@@ -32,6 +32,9 @@
     width: 3.5rem;
     height: 2rem;
 }
+.mini-head-img:hover{
+    cursor: pointer;
+}
 
 @media (min-width: 360px) and (max-width: 600px){
     

@@ -151,6 +151,9 @@ input{
     text-align: center;
     padding: 0px;
     color: black;
+    background-color: white;
+    border: none;
+    height: 2.5rem;
 
 }
 .input1tittle{

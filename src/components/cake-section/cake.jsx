@@ -109,7 +109,7 @@ const Cake = () => {
     <>
       <div className="cake-con">
         <div className="main-cake-con">
-          <div className="logo-img">
+          <div className="logo-img" onClick={()=>{navigate('/')}}>
             <img src={logo} alt="logo" id="logo-img" />
           </div>
 

@@ -20,6 +20,10 @@
     text-align: center;
 
 }
+.aboutus-main-con img{
+   
+  cursor: pointer;
+}
 .company-info{
     font-family: IBM Plex Sans;
     font-size: 20px;

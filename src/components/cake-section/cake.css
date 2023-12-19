@@ -16,11 +16,20 @@
     height: 8rem;
    
 }
+#logo-img:hover{
+   cursor: pointer;
+   
+}
 .grid-img-beigein{
     width: 5rem;
     height: 3rem;
    
 }
+.grid-img-beigein:hover{
+    cursor: pointer;
+   
+}
+
 .headding-cake h1{
     
     font-family: Oswald;

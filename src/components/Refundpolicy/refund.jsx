@@ -10,7 +10,7 @@ const Refund =(()=>{
         <>
               <div className="refund-con">
                   <div className='main-cake-con'>
-                        <img src={logo} alt='logo' className='logo-img'/>
+                        <img src={logo} alt='logo' className='logo-img' onClick={()=>{navigate('/')}}/>
                         {/* <div className='headding-cake'>
                             <h1>MINI</h1>
                             <p>Theater</p>
