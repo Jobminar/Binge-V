@@ -5,9 +5,34 @@ import "../mini/mini-home.css";
 import grid from "../../assets/images/grid.png";
 import Booknow from "../../assets/images/Frame 11.png";
 import Largehead from "./largehead";
+import { CircularProgress } from "@mui/material";
+import Swal from "sweetalert2";
 // import Minihead from "./minihead";
 
 const Minihome = () => {
+  const loaderStyle = {
+    position: "fixed",
+    top: "auto", // Set top to auto
+    bottom: 0, // Position at the bottom
+    left: 0,
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 9999,
+    background: "rgba(255, 255, 255, 0.8)", // Semi-transparent white background
+  };
+
+  const textStyles = {
+    textAlign: "center",
+    position: "absolute",
+    top: "20%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    fontSize: "1.5rem", // You can adjust the size accordingly
+  };
+
   // slot selection usestate
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [fetchedSlotData, setFetchedSlotData] = useState([]);
@@ -38,7 +63,7 @@ const Minihome = () => {
     return dateObject.toLocaleDateString("en-GB", options);
   };
   const [showAdvanceBooking, setShowAdvanceBooking] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   // Time slots for advanced booking
   const timeSlots = [
     "10:00 am - 01:00 pm",
@@ -74,6 +99,7 @@ const Minihome = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const response = await fetch(
           `https://binge-be.onrender.com/getdatetime`
         );
@@ -96,6 +122,8 @@ const Minihome = () => {
         console.log("Fetched Slots:", filteredSlots);
       } catch (error) {
         console.error("Error fetching slots:", error.message);
+      } finally {
+        setLoading(false); // Set loading to false after fetch, regardless of success or error
       }
     };
 
@@ -158,11 +186,17 @@ const Minihome = () => {
     const selectedSlot = sessionStorage.getItem("selectedSlot");
 
     if (!inputValues.date || !inputValues.event) {
-      // If the date or event is not selected, show an alert
-      alert("Please select both date and event before proceeding.");
+      // If the date or event is not selected, show a SweetAlert2 error message
+      Swal.fire({
+        title: "Error",
+        text: "Please select both date and event before proceeding.",
+      });
     } else if (!selectedSlot) {
-      // If no slot is selected, show an alert
-      alert("Please select a slot before proceeding.");
+      // If no slot is selected, show a SweetAlert2 warning message
+      Swal.fire({
+        title: "Warning",
+        text: "Please select a slot before proceeding.",
+      });
     } else {
       // Store the selected event in sessionStorage
       sessionStorage.setItem("selectedEvent", inputValues.event);
@@ -174,19 +208,30 @@ const Minihome = () => {
 
   return (
     <div className="mini-home-con">
+      {loading && (
+        <div style={loaderStyle} className="loader-container">
+          <div>
+            <h6 style={textStyles}>
+              Please be patient as your preferred slots are currently loading.
+            </h6>
+            <CircularProgress color="primary" size={60} thickness={4} />
+          </div>
+        </div>
+      )}
       {/* <div className="mini-head">
           <h1>STANDARD<span>THEATER</span></h1>
           <div className="grid-con">
              <img src={grid} alt="minigrid"/>
           </div>
       </div> */}
-      <Largehead/>
+      <Largehead />
       {/* input title section */}
+
       <div className="input-head">
         <p className="input1tittle">Check slot availability</p>
         <p className="input1tittle">Event</p>
       </div>
-      
+
       <div className="input-section">
         {/* date input */}
         <div className="input-sub">
@@ -218,11 +263,10 @@ const Minihome = () => {
         </div>
       </div>
 
-
       {/* mobile version */}
       <div className="input-head-mobile-version">
-         <p className="input1tittle">Check slot availability</p>
-         <div className="input-sub">
+        <p className="input1tittle">Check slot availability</p>
+        <div className="input-sub">
           <input
             type="date"
             className="input1"
@@ -231,9 +275,9 @@ const Minihome = () => {
             onChange={handleInputChange}
             min={today}
           />
-         </div>
-         <p className="input1tittle">Event</p>
-         <div className="input-sub">
+        </div>
+        <p className="input1tittle">Event</p>
+        <div className="input-sub">
           <select
             className="input4"
             name="event"
@@ -323,117 +367,114 @@ const Minihome = () => {
       </div>
       {/*Advance Booking*/}
       {/* desktop version table section */}
-      <div className="desktop-version-slot-booking"> 
-      <div
-        className="table-section"
-        style={{ display: showAdvanceBooking ? "display" : "display" }}
-      >
-        {/* <h6 className="slots" style={{ fontSize: "24px" }}>
+      <div className="desktop-version-slot-booking">
+        <div
+          className="table-section"
+          style={{ display: showAdvanceBooking ? "display" : "display" }}
+        >
+          {/* <h6 className="slots" style={{ fontSize: "24px" }}>
           Select a Slot
         </h6> */}
-        <table>
-          <thead>
-            <tr>
-              <th className="thead">Date</th>
-              <th className="thead">Time</th>
-              <th className="thead">Price</th>
-              <th className="thead">Select Slot</th>
-            </tr>
-          </thead>
-          <tbody>
-            {fetchedSlotData.map((slot) => (
-              <tr key={slot._id}>
-                <td>{formatDate(slot.date)}</td>
-                <td>{slot.time}</td>
-                <td>{slot.price}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={(event) => handleSlotSelection(event, slot.time)}
-                    disabled={selectedSlot && selectedSlot !== slot.time}
-                  />
-                </td>
+          <table>
+            <thead>
+              <tr>
+                <th className="thead">Date</th>
+                <th className="thead">Time</th>
+                <th className="thead">Price</th>
+                <th className="thead">Select Slot</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div
-          className="book-now"
-          onClick={() => {
-            handleNextPage();
-          }}
-        >
-          <img src={Booknow} alt="book-now" />
+            </thead>
+            <tbody>
+              {fetchedSlotData.map((slot) => (
+                <tr key={slot._id}>
+                  <td>{formatDate(slot.date)}</td>
+                  <td>{slot.time}</td>
+                  <td>{slot.price}</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      onChange={(event) =>
+                        handleSlotSelection(event, slot.time)
+                      }
+                      disabled={selectedSlot && selectedSlot !== slot.time}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div
+            className="book-now"
+            onClick={() => {
+              handleNextPage();
+            }}
+          >
+            <img src={Booknow} alt="book-now" />
+          </div>
         </div>
       </div>
-      </div>
-      
-       
-
 
       {/* mobile version - slot booking */}
       <div className="mobile-version-slot-booking">
-            <div
-              className="table-section"
-              style={{ display: showAdvanceBooking ? "display" : "display" }}
-            >
-              {/* <h6 className="slots" style={{ fontSize: "24px" }}>
+        <div
+          className="table-section"
+          style={{ display: showAdvanceBooking ? "display" : "display" }}
+        >
+          {/* <h6 className="slots" style={{ fontSize: "24px" }}>
                 Select a Slot
               </h6> */}
-            <div className="mobile-date-time">
+          <div className="mobile-date-time">
             {fetchedSlotData.length > 0 && (
-                <div className="date-time">
-                  <div className="mobile-date">
-                    <p>Date</p>
-                    <p>{formatDate(fetchedSlotData[0].date)}</p>
-                  </div>
-                  <div className="mobile-price">
-                    <p className="thead">Price</p>
-                    <p>2999</p>
-                  </div>
+              <div className="date-time">
+                <div className="mobile-date">
+                  <p>Date</p>
+                  <p>{formatDate(fetchedSlotData[0].date)}</p>
                 </div>
-              )}
+                <div className="mobile-price">
+                  <p className="thead">Price</p>
+                  <p>2999</p>
+                </div>
               </div>
-              <table>
-                <thead>
-                  <tr>
-                    <th className="thead">Time</th>
-                    <th className="thead">Select Slot</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {fetchedSlotData.map((slot) => (
-                    <tr key={slot._id}>
-                     
-                      <td className="slot-id">{slot.time}</td>
-                     
-                      <td className="slot-checkbox">
-                        <input
-                          type="checkbox"
-                          onChange={(event) => handleSlotSelection(event, slot.time)}
-                          disabled={selectedSlot && selectedSlot !== slot.time}
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              
-              <div
-                className="book-now"
-                onClick={() => {
-                  handleNextPage();
-                }}
-              >
-                <img src={Booknow} alt="book-now" />
-              </div>
-            </div>
-            </div>
-     
+            )}
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th className="thead">Time</th>
+                <th className="thead">Select Slot</th>
+              </tr>
+            </thead>
+            <tbody>
+              {fetchedSlotData.map((slot) => (
+                <tr key={slot._id}>
+                  <td className="slot-id">{slot.time}</td>
+
+                  <td className="slot-checkbox">
+                    <input
+                      type="checkbox"
+                      onChange={(event) =>
+                        handleSlotSelection(event, slot.time)
+                      }
+                      disabled={selectedSlot && selectedSlot !== slot.time}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div
+            className="book-now"
+            onClick={() => {
+              handleNextPage();
+            }}
+          >
+            <img src={Booknow} alt="book-now" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
-
-
 
 export default Minihome;
