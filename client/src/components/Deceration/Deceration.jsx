@@ -1,9 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 import "./Deceration.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-
+import { CircularProgress } from "@mui/material";
 import logo from "../../assets/images/logo.png";
 import grid from "../../assets/images/grid.png";
 import calender from "../../assets/images/calender-logo.png";
@@ -12,7 +13,27 @@ import nextstep from "../../assets/images/Frame 12.png";
 
 const Deceration = () => {
   const [decorations, setDecorations] = useState([]);
-
+  const loaderStyle = {
+    position: "fixed",
+    top: "auto", // Set top to auto
+    bottom: 0, // Position at the bottom
+    left: 0,
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 9999,
+    background: "rgba(255, 255, 255, 0.8)", // Semi-transparent white background
+  };
+  const textStyles = {
+    textAlign: "center",
+    position: "absolute",
+    top: "20%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    fontSize: "1.5rem", // You can adjust the size accordingly
+  };
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -34,7 +55,7 @@ const Deceration = () => {
     // Store decorationName in sessionStorage
     sessionStorage.setItem("selectedDecoration", decorationName);
   };
-
+  const [loading, setLoading] = useState(false);
   const pricedecoration = location.state && location.state.sendamountcake;
   const pricetotalbefore = parseInt(pricedecoration) || 0;
 
@@ -59,26 +80,34 @@ const Deceration = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://binge-be.onrender.com/getdecorations",
-          {
-            headers: {
-              // Your headers here if needed
-            },
+        setLoading(true);
+
+        // Fetch data with a timeout of 10 seconds (adjust as needed)
+        const timeout = setTimeout(async () => {
+          const response = await fetch(
+            "https://binge-be.onrender.com/getdecorations",
+            {
+              headers: {
+                // Your headers here if needed
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch data");
           }
-        );
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
+          const data = await response.json();
+          setDecorations(data);
+          setLoading(false); // Set loading to false on successful response
+        }, 5000); // 5 seconds timeout
 
-        const data = await response.json();
-        setDecorations(data);
+        // Clear the timeout if the fetch is successful
+        return () => clearTimeout(timeout);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false); // Set loading to false on error
         // setError('Error fetching data. Please try again later.');
-      } finally {
-        // setLoading(false);
       }
     };
 
@@ -88,6 +117,17 @@ const Deceration = () => {
   return (
     <>
       <div className="deceration-con">
+        {loading && (
+          <div style={loaderStyle} className="loader-container">
+            <div>
+              <h6 style={textStyles}>
+                Satisfy your cravings! Now, let's spice things up with some
+                delightful Decorations.✨
+              </h6>
+              <CircularProgress color="primary" size={60} thickness={4} />
+            </div>
+          </div>
+        )}
         <div className="main-cake-con">
           <div className="logo-img">
             <img src={logo} alt="logo" id="logo-img" />
