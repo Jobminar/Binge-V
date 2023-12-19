@@ -1,0 +1,22 @@
+.payment-list {
+    list-style: none;
+    padding: 100px;
+  }
+  
+  .payment-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1px;
+  }
+  
+  .payment-list dt {
+    font-weight: bold;
+  }
+  
+  .payment-list dd {
+    margin-left: 10px;
+  }
+  .btn-primary{
+    background-color: darksalmon;
+  }
+  .btn-primary:hover{background-color: rgb(240, 147, 147)}
