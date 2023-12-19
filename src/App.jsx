@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
-import './App.css'
+import "./App.css";
 import Home from "./components/Home/home";
 import Navbar from "./components/Home/navbar";
 import Aboutus from "./components/About/about";
@@ -19,14 +19,18 @@ import Gallery from "./components/Gallery/gallery";
 import Refund from "./components/Refundpolicy/refund";
 import Contact from "./components/contactus/contact";
 import Userinputslarge from "./components/userinputsl-large/userinputslarge";
-import profile from './assets/images/Whatsapp.jpeg'
+import profile from "./assets/images/Whatsapp.jpeg";
 import Whatsappbeingin from "./components/whatsapp/Whatsapp";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-       <FloatingWhatsApp phoneNumber='9963715817' accountName='Binge-in' avatar={profile}/>
+        <FloatingWhatsApp
+          phoneNumber="9963715817"
+          accountName="Binge-in"
+          avatar={profile}
+        />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/navbar" element={<Navbar />}></Route>
@@ -46,9 +50,7 @@ function App() {
           <Route path="/gallery" element={<Gallery />}></Route>
           <Route path="/refund" element={<Refund />}></Route>
           <Route path="/contactus" element={<Contact />}></Route>
-          
         </Routes>
-       
       </BrowserRouter>
     </>
   );

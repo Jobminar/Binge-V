@@ -1,8 +1,14 @@
-/* Whatsapp.css */
-
 /* General styling */
-.whatsapp-container {
+.img-equal-height {
+  height: 350px; /* Adjust the height as needed */
+  width: auto;
+}
 
+.img-large {
+  max-height: 400px; /* Adjust the max-height as needed */
+  width: auto;
+}
+.whatsapp-container {
   height: 100vh;
 }
 
@@ -15,13 +21,12 @@
 }
 
 .overlay {
- 
   background: linear-gradient(to bottom, #303030, #484848, #303030);
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  margin:0
+  margin: 0;
 }
 
 /* Header styling */
@@ -47,31 +52,24 @@
 }
 
 /* Card and details styling */
-/* Default styling for .whatsapp-card */
-/* Default styling for .whatsapp-card */
 .whatsapp-card {
   margin: 3em;
   background: linear-gradient(to bottom, #000000, rgb(12, 8, 9));
   border-radius: 10px;
   padding: 20px;
   text-align: left;
+  /* Animation for card entrance */
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 0.5s forwards ease-in-out;
 }
 
-/* Landscape mode styles for larger screens */
-@media only screen and (min-width: 768px) and (orientation: landscape) {
-  .whatsapp-card {
-    padding: 15px; /* Adjust padding for landscape mode on larger screens */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
-
-/* Landscape mode styles for smaller screens (e.g., smartphones) */
-@media only screen and (max-width: 480px) and (orientation: landscape) {
-  .whatsapp-card {
-    padding: 10px; /* Further adjust padding for landscape mode on smaller screens */
-  }
-}
-
-
 
 .payment-details {
   margin-top: 20px;
@@ -92,29 +90,19 @@
   filter: brightness(1.2);
 }
 
-/* Animation for card entrance */
-.whatsapp-card {
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeInUp 0.5s forwards ease-in-out;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Media queries for responsiveness */
 @media only screen and (max-width: 600px) {
   .whatsapp-card {
     padding: 15px;
   }
-  
+
   .btn-home,
   .btn-success {
     padding: 8px 15px;
+  }
+  #Phonepe-but {
+    margin-left: 80px;
+    width:220px /* Adjust the right margin as needed */
   }
 }
 
@@ -130,7 +118,6 @@
 .additional-gradient-3 {
   background: linear-gradient(to right, #800080, #ba55d3, #800080);
 }
-
 
 .qr-code-section {
   margin-top: 20px;
@@ -151,12 +138,7 @@
   margin: 0;
 }
 
-
-/* Add this to your existing CSS or create a new CSS file */
-
-/* Add this to your existing CSS or create a new CSS file */
-/* You can customize the styling according to your preferences */
-/* Existing styles for .grid-container */
+/* Updated styles for grid-container and grid-item */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -164,7 +146,6 @@
   justify-content: center;
 }
 
-/* Updated styles for .grid-item */
 .grid-item {
   background: linear-gradient(rgba(81, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   padding: 20px;
@@ -178,41 +159,13 @@
 .grid-item:hover {
   transform: scale(1.05);
 }
-
-/* Existing styles for .logo and .header h1 */
-.logo {
-  width: 150px;
-  height: auto;
+.btn-copy-upi {
+  width: 150px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  /* Add any other styles you want */
 }
-
-.header h1 {
-  margin-top: 10px;
-  font-size: 1.8rem;
-  color:darksalmon;
-}
-
-/* Existing styles for .payment-details, .phone-section, .payment-section */
-.payment-details,
-.phone-section,
-.payment-section {
-  text-align: left;
-}
-
-/* Existing styles for .or-heading and .payment-message */
-.or-heading {
-  font-size: 1.2rem;
-  margin: 10px 0;
-}
-
-.payment-message {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.img-small {
-  max-width: 350px; /* Adjust the size as needed */
-  max-height: 350px; /* Adjust the size as needed */
+#Phonepe-but {
+  margin-right: 100px; /* Adjust the right margin as needed */
 }
 
 /* ... (existing styles) */
-

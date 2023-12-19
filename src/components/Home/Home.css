@@ -471,3 +471,23 @@
     
     
 } 
+
+
+.loading-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .loading-container p {
+    margin-top: 10px;
+  }
+  
+  .loading-container img {
+    width: 8rem; /* You can adjust the width as needed */
+    height: 8rem; /* You can adjust the height as needed */
+    margin-top: 20px;
+  }
+   

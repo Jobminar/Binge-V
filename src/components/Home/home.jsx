@@ -1,18 +1,21 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useState, useEffect } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
 import grid from "../../assets/images/grid.png";
-import mini from '../../assets/images/mini-theater.jpeg'
+import mini from "../../assets/images/mini-theater.jpeg";
 import large from "../../assets/images/large.jpeg";
 import call from "../../assets/images/call.png";
 import youtube from "../../assets/images/icon _youtube with circle_youtube.png";
 import insta from "../../assets/images/icon _instagram with circle icon_insta.png";
 import facebook from "../../assets/images/icon _facebook_facebook.png";
+import { CircularProgress } from "@mui/material";
 // import Navbar from './navbar';
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const openInstagram = () => {
     window.open(
@@ -30,13 +33,47 @@ const Home = () => {
   };
 
   const openCall = () => {
-    
+    // Replace the phone number with the actual phone number
     window.open("tel:+918074020058");
   };
   const openLocation = () => {
     window.open("https://maps.app.goo.gl/b5xtHs2DNd3oRuVX6?g_st=ic", "_blank");
   };
-  //..update
+
+  //this section is for loading animation____________________________________
+  useEffect(() => {
+    const handleLoad = () => {
+      // Ensure that everything is loaded before hiding the loading animation
+      setLoading(false);
+    };
+
+    // Attach the load event listener
+    window.addEventListener("load", handleLoad);
+
+    // Set a timeout to hide the loading animation after 5 seconds
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 5000); // 5000 milliseconds = 5 seconds
+
+    // Cleanup: Remove the event listener and clear the timeout to avoid memory leaks
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  if (loading) {
+    // Return CircularProgress while loading
+    return (
+      <div className="loading-container">
+        <CircularProgress />
+        {/* You can customize the text and logo here */}
+        <p>Loading....</p>
+        <img src={logo} alt="logo" className="logo" />
+      </div>
+    );
+  }
+  //this is for loading animation__________________________________________________
   return (
     <>
       <div className="Beigein-home-con">
