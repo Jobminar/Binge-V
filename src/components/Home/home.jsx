@@ -36,7 +36,7 @@ const Home = () => {
   const openLocation = () => {
     window.open("https://maps.app.goo.gl/b5xtHs2DNd3oRuVX6?g_st=ic", "_blank");
   };
-  //.
+  //..
   return (
     <>
       <div className="Beigein-home-con">
