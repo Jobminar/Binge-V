@@ -10,7 +10,7 @@ import QRCodeImage1 from "../../assets/images/phonepe.jpeg";
 import QRCodeImage2 from "../../assets/images/Googlepay.jpeg";
 import "./Whatsapp.css"; // External CSS file for additional styling
 
-const Whatsapp = () => {
+const Whatsappbeingin = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const fadeIn = useSpring({
@@ -96,67 +96,91 @@ const Whatsapp = () => {
         {/* Share via WhatsApp Button */}
         <div className="row">
           <div className="col">
-            <h2
-              className="navbar-text dynamic-effect"
-              style={{ marginLeft: "auto", marginRight: "1rem" }}
-            >
+            <h2 className="navbar-text dynamic-effect">
               To confirm the booking, transfer Rs 700/- as booking amount to
               displayed QR codes
             </h2>
           </div>
         </div>
 
-        {/* Phone Section */}
-        <div className="row mt-3">
-          <div className="row mt-3">
-            <div className="col-md-1"></div>
-            <div className="col-md-4">
+        {/* Phone and QR Code Section */}
+        <div className="row mt-3 d-flex justify-content-center">
+          <div className="col-md-6 mb-3">
+            <div className="mb-3 p-3">
               <img
                 src={QRCodeImage1}
                 alt="QR Code 1"
-                className="img-fluid animated-image img-large"
-                style={{ objectFit: "cover", height: "100%" }}
+                className="img-fluid animated-image img-equal-height"
+                style={{ margin: "0 10px" }}
               />
+              {/* UPI ID (PhonePe) */}
+              <p>
+                <strong>UPI ID (PhonePe):</strong> sandeepgandi.2-2@okhdfcbank
+              </p>
+              <div className="d-flex justify-content-center">
+                <button
+                  className="btn btn-primary btn-equal-size btn-copy-upi"
+                  id="Phonepe-but"
+                  onClick={() =>
+                    navigator.clipboard.writeText("sandeepgandi.2-2@okhdfcbank")
+                  }
+                >
+                  <FaClipboard /> Copy UPI ID
+                </button>
+              </div>
             </div>
-            <div className="col-md-2 d-flex align-items-center justify-content-center">
-              <h1 className="or-heading m-0 p-0" style={{ fontSize: "3rem" }}>
-                OR
-              </h1>
-            </div>
-            <div className="col-md-4">
+          </div>
+
+          <div className="col-md-5 mb-3">
+            <div className="mb-3 p-3">
               <img
                 src={QRCodeImage2}
                 alt="QR Code 2"
-                className="img-fluid animated-image img-large"
-                style={{ objectFit: "cover", height: "100%" }}
+                className="img-fluid animated-image img-equal-height"
+                style={{ margin: "0 10px" }}
               />
+              {/* UPI ID (Google Pay) */}
+              <p>
+                <strong>UPI ID (Google Pay):</strong> 9963715817-2@axl
+              </p>
+              <div className="d-flex justify-content-center">
+                <button
+                  className="btn btn-primary btn-equal-size btn-copy-upi"
+                  onClick={() =>
+                    navigator.clipboard.writeText("9963715817-2@axl")
+                  }
+                >
+                  <FaClipboard /> Copy UPI ID
+                </button>
+              </div>
             </div>
-            <div className="col-md-1"></div>
           </div>
+          <h3 className="mt-2">
+            Kindly share screenshots of your successful payment with the
+            following numbers.
+          </h3>
         </div>
 
-        {/* QR Code Section */}
-        <div className="row mt-3">
-          <div className="mb-3 p-3">
-            <h3>
-              Please Share the payment details or Screen Shots via Whatsapp on:{" "}
-            </h3>
-          </div>
+        {/* Phone Numbers */}
+        <div className="row">
           {phoneNumbers.map((phoneNumber, index) => (
-            <div key={index} className="col-md-4 mb-3">
-              <div className="mb-3 p-3">
+            <div
+              key={index}
+              className="col-md-6 mb-3 d-flex align-items-center justify-content-center"
+            >
+              <div className="mb-3 p-3 text-center">
                 <p>
                   <strong>Phone Number:</strong> {phoneNumber}
                 </p>
                 <div className="btn-group" role="group">
                   <button
-                    className="btn btn-primary mr-2"
+                    className="btn btn-success btn-equal-size"
                     onClick={() => handleDialNumber(phoneNumber)}
                   >
                     <FaPhone /> Dial
                   </button>
                   <button
-                    className="btn btn-success"
+                    className="btn btn-primary btn-equal-size"
                     onClick={() => handleCopyNumber(phoneNumber)}
                   >
                     <FaClipboard /> Copy
@@ -170,13 +194,11 @@ const Whatsapp = () => {
 
       {/* Footer */}
       <footer className="footer mt-3">
-        {" "}
         <ul>
-          <li>
-            <h4 className="mb-0">NOTE:</h4>
-          </li>
-
-          <li>
+          <h4 className="mb-0" style={{ color: "rgb(233,150,122)" }}>
+            NOTE:
+          </h4>
+          <li style={{ marginLeft: "1.2rem" }}>
             We collect an advance amount of 700/- towards the confirmation of
             your booking. Partial advance amount (Rs 500/-) is refundable if you
             cancel the slot 72 hours prior to your booking...
@@ -193,4 +215,4 @@ const Whatsapp = () => {
   );
 };
 
-export default Whatsapp;
+export default Whatsappbeingin;
